@@ -24,23 +24,23 @@ elif region[0] in asia:
 elif region[0] in europe:
     region.append('europe')
 
-
+riotkey = ""
 nickname = str(input("Nick em jogo: ")).replace(' ', '').lower()
 
 
 # Nome do jogador
-summoner = requests.get(f"https://{region[0]}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{nickname}?api_key=RGAPI-f1949d59-a01b-4b3e-a86b-80a143389c3e")
+summoner = requests.get(f"https://{region[0]}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{nickname}?api_key={riotkey}")
 # Transforma as informações do jogador em um dicionário
 summoner = summoner.json()
 
 
 # RiotID
-riotid = requests.get(f"https://{region[1]}.api.riotgames.com/riot/account/v1/accounts/by-puuid/{summoner['puuid']}?api_key=RGAPI-f1949d59-a01b-4b3e-a86b-80a143389c3e")
+riotid = requests.get(f"https://{region[1]}.api.riotgames.com/riot/account/v1/accounts/by-puuid/{summoner['puuid']}?api_key={riotkey}")
 riotid = riotid.json()
 
 
 # Rank do jogador
-rank = requests.get(f"https://br1.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner['id']}?api_key=RGAPI-f1949d59-a01b-4b3e-a86b-80a143389c3e")
+rank = requests.get(f"https://{region[0]}.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner['id']}?api_key={riotkey}")
 rank = rank.json()
 
 
@@ -64,10 +64,10 @@ for k, v in jogador.items():
     print(f"{k} -> {v}")
 
 
-#print(jogador)
-#print(summoner)
-#print(riotid)
-#print(rank)
-#print(len(rank))
+# print(jogador)
+# print(summoner)
+# print(riotid)
+# print(rank)
+# print(len(rank))
 
 
